@@ -1,23 +1,43 @@
 import logo from './logo.svg';
 import './App.css';
+import { useQuery, useQueryClient } from 'react-query';
+import axios from 'axios';
+import { CreateCreditCardForm } from './components/CreateCreditCardForm';
 
+function getCreditAccounts(){
+  return axios.get("http://localhost:8080/creditaccounts")
+}
 function App() {
+  const queryClient = useQueryClient();
+  const query = useQuery('creditaccounts', getCreditAccounts);
+  if(query.isLoading){
+    return <div>Loading..</div>
+  }
+  const creditCards = query.data.data;
+  console.log();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>Credit card System</h2>
+      <CreateCreditCardForm onSuccessFullAdd={query.refetch()}></CreateCreditCardForm>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Card Number</th>
+            <th>Balance</th>
+            <th>Card Limit</th>
+          </tr>
+
+        </thead>
+        <tbody>
+          {creditCards.map((e,i)=><tr key={i}>
+            <td>{e.name}</td>
+            <td>{e.cardNo}</td>
+            <td>${e.balance}</td>
+            <td>${e.amountLimit}</td>
+          </tr>)}
+        </tbody>
+      </table>
     </div>
   );
 }
