@@ -19,7 +19,7 @@ function App() {
     <div className="App">
       <h2>Credit card System</h2>
       <CreateCreditCardForm onSuccessFullAdd={query.refetch()}></CreateCreditCardForm>
-      <table>
+      <table className='table'>
         <thead>
           <tr>
             <th>Name</th>

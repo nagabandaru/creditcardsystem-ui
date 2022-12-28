@@ -40,19 +40,23 @@ export class CreateCreditCardForm  extends React.Component {
         return <>
         {this.state.errors.map(e=><div>{e.defaultMessage}</div>)}
         <form onSubmit={this.handleSubmit}> 
-        <div>
-        <label>Name</label>
-        <input type="text" name="name"  value={this.state['name']} onChange={this.handleChange}/>
-        </div>
-        <div>
-        <label>Card Number</label>
-        <input type="text" name="cardNo"  value={this.state['cardNo']} onChange={this.handleChange}/>
-        </div>
-        <div>
-        <label>Limit</label>
-        <input type="text" name="amountLimit"  value={this.state['amountLimit']} onChange={this.handleChange}/>
-        </div>
-        <input type="submit" value="Add Card"/>
+        <div className="container">
+          <div className="item">
+            <label>Name</label>
+            <input type="text" name="name"  value={this.state['name']} onChange={this.handleChange}/>
+          </div>
+          <div className="item">
+            <label>Card Number</label>
+            <input type="text" name="cardNo"  value={this.state['cardNo']} onChange={this.handleChange}/>
+          </div>
+          <div className="item">
+            <label>Limit</label>
+            <input type="text" name="amountLimit"  value={this.state['amountLimit']} onChange={this.handleChange}/>    
+          </div>
+          <div className='item'>
+            <input type="submit" value="Add Card"/>
+          </div>
+          </div>
       </form>
         </>
     }
