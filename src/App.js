@@ -5,7 +5,7 @@ import axios from 'axios';
 import { CreateCreditCardForm } from './components/CreateCreditCardForm';
 
 function getCreditAccounts(){
-  return axios.get("http://localhost:8080/creditaccounts")
+  return axios.get(`${process.env.REACT_APP_API_BASE}/creditaccounts`)
 }
 function App() {
   const queryClient = useQueryClient();
