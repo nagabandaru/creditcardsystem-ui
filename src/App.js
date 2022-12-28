@@ -13,12 +13,13 @@ function App() {
   if(query.isLoading){
     return <div>Loading..</div>
   }
-  const creditCards = query.data.data;
-  console.log();
+  const creditCards = query.data.data || {};
   return (
     <div className="App">
       <h2>Credit card System</h2>
-      <CreateCreditCardForm onSuccessFullAdd={query.refetch()}></CreateCreditCardForm>
+      <CreateCreditCardForm onSuccessFullAdd={(creditCard)=>{
+        creditCards.push(creditCard);
+      }}></CreateCreditCardForm>
       <table className='table'>
         <thead>
           <tr>
@@ -27,7 +28,6 @@ function App() {
             <th>Balance</th>
             <th>Card Limit</th>
           </tr>
-
         </thead>
         <tbody>
           {creditCards.map((e,i)=><tr key={i}>
